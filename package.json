@@ -15,7 +15,8 @@
     "node": ">=0.10.26"
   },
   "scripts": {
-    "test": "grunt bedrock"
+    "test": "grunt bedrock",
+    "build": "grunt minify"
   },
   "devDependencies": {
     "@ephox/bolt": "^1.6.0",
@@ -34,5 +35,6 @@
     "jquery": "~1.11.3",
     "load-grunt-tasks": "~3.5.2",
     "moxie-zip": "~0.0.3"
-  }
+  },
+  "dependencies": {}
 }
