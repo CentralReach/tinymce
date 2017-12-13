@@ -109,7 +109,10 @@ define("tinymce/SelectionOverrides", [
 				return null;
 			}
 
-			scrollIntoView(node, direction === -1);
+			// CR_CUSTOMIZED case 43432 - add check for !isContentEditableFalse
+			if (!isContentEditableFalse(node)) {
+				scrollIntoView(node, direction === -1);
+			}
 
 			return fakeCaret.show(before, node);
 		}
