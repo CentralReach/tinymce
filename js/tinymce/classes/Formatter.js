@@ -521,11 +521,12 @@ define("tinymce/Formatter", [
 						parentName = node.parentNode.nodeName.toLowerCase();
 
 						// Node has a contentEditable value
-						if (node.nodeType === 1 && getContentEditable(node)) {
-							lastContentEditable = contentEditable;
-							contentEditable = getContentEditable(node) === "true";
-							hasContentEditableState = true; // We don't want to wrap the container only it's children
-						}
+						// CR_CUSTOMIZED case 28513 - comment out following
+						// if (node.nodeType === 1 && getContentEditable(node)) {
+						// 	lastContentEditable = contentEditable;
+						// 	contentEditable = getContentEditable(node) === "true";
+						// 	hasContentEditableState = true; // We don't want to wrap the container only it's children
+						// }
 
 						// Stop wrapping on br elements
 						if (isEq(nodeName, 'br')) {
@@ -547,7 +548,8 @@ define("tinymce/Formatter", [
 
 						// Can we rename the block
 						// TODO: Break this if up, too complex
-						if (contentEditable && !hasContentEditableState && format.block &&
+						// CR_CUSTOMIZED case 28513 - remove contentEditable checks
+						if (format.block &&
 							!format.wrapper && isTextBlock(nodeName) && isValid(parentName, wrapName)) {
 							node = dom.rename(node, wrapName);
 							setElementFormat(node);
@@ -831,11 +833,12 @@ define("tinymce/Formatter", [
 				var children, i, l, lastContentEditable, hasContentEditableState;
 
 				// Node has a contentEditable value
-				if (node.nodeType === 1 && getContentEditable(node)) {
-					lastContentEditable = contentEditable;
-					contentEditable = getContentEditable(node) === "true";
-					hasContentEditableState = true; // We don't want to wrap the container only it's children
-				}
+				// CR_CUSTOMIZED case 28513 - comment out following
+				// if (node.nodeType === 1 && getContentEditable(node)) {
+				// 	lastContentEditable = contentEditable;
+				// 	contentEditable = getContentEditable(node) === "true";
+				// 	hasContentEditableState = true; // We don't want to wrap the container only it's children
+				// }
 
 				// Grab the children first since the nodelist might be changed
 				children = grep(node.childNodes);

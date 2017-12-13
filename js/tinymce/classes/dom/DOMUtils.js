@@ -174,7 +174,21 @@ define("tinymce/dom/DOMUtils", [
 
 			// If it's a node then check the type and use the nodeName
 			if (type) {
-				return !!(type === 1 && blockElementsMap[node.nodeName]);
+				var TEXT_NODE = 3, ELEMENT_NODE = 1, 
+					isKnownBlockElement = !!(type === ELEMENT_NODE && blockElementsMap[node.nodeName]);
+
+				// isKnownBlockElement is the default tinymce library check; we add the next one for our purposes
+				// CR_CUSTOMIZED case 43432, 44311
+				var isPretendingToBeBlockElement = false;
+				if (!isKnownBlockElement && type !== TEXT_NODE) {
+					try {
+						var calculatedDisplayStyle = self.win && self.win.getComputedStyle && self.win.getComputedStyle(node, "").display;
+						isPretendingToBeBlockElement = calculatedDisplayStyle === "block";
+					} catch (ex) {
+						isPretendingToBeBlockElement = false;
+					}
+				}
+				return isKnownBlockElement || isPretendingToBeBlockElement;
 			}
 
 			return !!blockElementsMap[node];
