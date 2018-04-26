@@ -251,6 +251,9 @@ define("tinymce/tableplugin/Dialogs", [
 
 					dom.setStyle(tableElm, 'height', addSizeSuffix(data.height));
 
+					// CR_CUSTOMIZED case 26585, add custom table class
+					dom.addClass(tableElm, 'tinymce-table');
+
 					// Toggle caption on/off
 					captionElm = dom.select('caption', tableElm)[0];
 
