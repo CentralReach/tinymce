@@ -56,7 +56,8 @@ define("tinymce/tableplugin/Plugin", [
 				html += '</tr>';
 			}
 
-			html += '</tbody></table>';
+			// CR_CUSTOMIZED case 47700 - text being added in invalid div below new table
+			html += '</tbody></table><p></p>';
 
 			editor.undoManager.transact(function() {
 				editor.insertContent(html);
